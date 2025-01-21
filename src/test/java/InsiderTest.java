@@ -32,5 +32,7 @@ public class InsiderTest {
         System.out.println("Case-5\n");
         qaJobsPage.openJob();
         jobApplyPage.visitJobApplyPage();
+
+        driver.quit();
     }
 }
