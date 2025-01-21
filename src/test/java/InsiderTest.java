@@ -1,38 +1,58 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 public class InsiderTest {
-    WebDriver driver = new ChromeDriver();
-    HomePage homePage = new HomePage(driver);
-    QAJobsPage qaJobsPage=new QAJobsPage(driver);
-    JobApplyPage jobApplyPage=new JobApplyPage(driver);
-    private Assertions Assert;
+
+    private WebDriver driver;
+    private HomePage homePage;
+    private QAJobsPage qaJobsPage;
+    private JobApplyPage jobApplyPage;
+    private CareersPage careersPage;
+
+    @BeforeEach
+    public void setUp() {
+        driver = new ChromeDriver();
+        homePage = new HomePage(driver);
+        qaJobsPage = new QAJobsPage(driver);
+        jobApplyPage = new JobApplyPage(driver);
+    }
 
     @Test
-    public void inTest() {
-        //Test-1
-        System.out.println("Case-1\n");
+    public void testCareerPageAndJobApplication() {
+        // Case-1:
+        System.out.println("Case-1: ");
         homePage.visitHomePage();
-        //Test-2
-        System.out.println("Case-2\n");
-        CareersPage careersPage2 = homePage.clickCompanyMenu();
-        Assert.assertTrue(careersPage2.isLocationsBlockVisible());
-        Assert.assertTrue(careersPage2.isTeamsBlockVisible());
-        Assert.assertTrue(careersPage2.isLifeAtInsiderBlockVisible());
-        //Test-3
-        System.out.println("Case-3\n");
+
+        // Case-2:
+        System.out.println("Case-2: ");
+        careersPage = homePage.clickCompanyMenu();
+        Assertions.assertTrue(careersPage.isLocationsBlockVisible(), "Locations block is not visible");
+        Assertions.assertTrue(careersPage.isTeamsBlockVisible(), "Teams block is not visible");
+        Assertions.assertTrue(careersPage.isLifeAtInsiderBlockVisible(), "Life at Insider block is not visible");
+
+        // Case-3:
+        System.out.println("Case-3: ");
         qaJobsPage.clickSeeQAJobsButton();
-        //Test-4
-        System.out.println("Case-4\n");
+
+        // Case-4:
+        System.out.println("Case-4:");
         qaJobsPage.areJobsListed();
-        //Test-5
-        System.out.println("Case-5\n");
+
+        // Case-5:
+        System.out.println("Case-5:");
         qaJobsPage.openJob();
         jobApplyPage.visitJobApplyPage();
+    }
 
-        driver.quit();
+    @AfterEach
+    public void tearDown() {
+        // Test sonrası tarayıcıyı kapat
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
