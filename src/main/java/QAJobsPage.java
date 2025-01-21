@@ -41,7 +41,7 @@ public class QAJobsPage {
             waitForElementToBeClickable(By.xpath("//a[contains(text(), 'See all QA jobs')]")).click();
 
             scrollPage(150);
-
+            Thread.sleep(5000);
             //  "Quality Assurance" option otomatik geldiği için bekliyoruz
             WebElement select2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select2-filter-by-department-container")));
             String initialTitle = select2Element.getAttribute("title");
