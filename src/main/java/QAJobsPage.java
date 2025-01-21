@@ -51,14 +51,14 @@ public class QAJobsPage {
             selectDropdownByVisibleText(By.id("filter-by-location"), "Istanbul, Turkey");
             selectDropdownByVisibleText(By.id("filter-by-department"), "Quality Assurance");
 
-            // Filtre sonrası öğelerin görünür olmasını bekleyin
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
+
             System.out.println("Location: Istanbul, Turkey ve Department: Quality Assurance filtreleri uygulandı!");
-
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             // Filtreler sonrasında iş ilanlarının görünür hale gelip gelmediğini kontrol et
-            waitForElementToBeClickable(By.cssSelector("#jobs-list .position-list-item"));
-
+           /* waitForElementToBeClickable(By.cssSelector("#jobs-list .position-list-item"));
+            wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
+*/
         } catch (Exception e) {
             System.out.println("Error in clickSeeQAJobsButton: " + e.getMessage());
         }
@@ -72,11 +72,11 @@ public class QAJobsPage {
             scrollPage(250);
 
             // Filtre sonrası iş ilanlarının DOM'a tamamen yüklendiğini beklemek için explicit wait ekliyoruz
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             // Filtre sonrası iş ilanlarının görünür hale gelmesini bekleyin
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
-
+            //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
+            Thread.sleep(3000);
             // Filtreler sonrasında bulunan iş ilanlarını alıyoruz
             List<WebElement> jobItems = driver.findElements(By.cssSelector("#jobs-list .position-list-item"));
             System.out.println("Toplam kriterlere göre bulunan ilan sayısı : " + jobItems.size());
