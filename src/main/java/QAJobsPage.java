@@ -21,7 +21,6 @@ public class QAJobsPage {
         driver.manage().timeouts().setScriptTimeout(Duration.ofSeconds(PAGE_LOAD_TIMEOUT));
     }
 
-    // Bu metot artık WebElement döndürüyor
     private WebElement waitForElementToBeClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
@@ -35,15 +34,15 @@ public class QAJobsPage {
         try {
             driver.get("https://useinsider.com/careers/quality-assurance/");
 
-            // Accept All button
+            // Cookies Accept All button
             waitForElementToBeClickable(By.id("wt-cli-accept-all-btn")).click();
 
-            // See all QA jobs button
+            // all QA jobs button
             waitForElementToBeClickable(By.xpath("//a[contains(text(), 'See all QA jobs')]")).click();
 
             scrollPage(150);
 
-            // Wait until the "Quality Assurance" option is selected
+            //  "Quality Assurance" option otomatik geldiği için bekliyoruz
             WebElement select2Element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("select2-filter-by-department-container")));
             String initialTitle = select2Element.getAttribute("title");
             wait.until(ExpectedConditions.not(ExpectedConditions.attributeToBe(select2Element, "title", initialTitle)));
@@ -131,7 +130,7 @@ public class QAJobsPage {
     public void openJob() {
         try {
             scrollPage(250);
-            Thread.sleep(3000); // Here, we can replace this with wait for the elements if needed
+            Thread.sleep(3000);
 
             WebElement qaLink = driver.findElement(By.cssSelector("#jobs-list .position-list-item"));
             qaLink.click();
@@ -142,7 +141,6 @@ public class QAJobsPage {
 
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
-            // Switch to the new window
             switchToNewWindow(mainWindowHandle);
 
         } catch (Exception e) {
