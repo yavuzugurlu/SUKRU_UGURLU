@@ -54,11 +54,7 @@ public class QAJobsPage {
 
             System.out.println("Location: Istanbul, Turkey ve Department: Quality Assurance filtreleri uygulandı!");
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            // Filtreler sonrasında iş ilanlarının görünür hale gelip gelmediğini kontrol et
-           /* waitForElementToBeClickable(By.cssSelector("#jobs-list .position-list-item"));
-            wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
-*/
+
         } catch (Exception e) {
             System.out.println("Error in clickSeeQAJobsButton: " + e.getMessage());
         }
@@ -71,11 +67,7 @@ public class QAJobsPage {
             // Sayfayı kaydırmaya devam et
             scrollPage(250);
 
-            // Filtre sonrası iş ilanlarının DOM'a tamamen yüklendiğini beklemek için explicit wait ekliyoruz
-            //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
             // Filtre sonrası iş ilanlarının görünür hale gelmesini bekleyin
-            //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#jobs-list .position-list-item")));
             Thread.sleep(3000);
             // Filtreler sonrasında bulunan iş ilanlarını alıyoruz
             List<WebElement> jobItems = driver.findElements(By.cssSelector("#jobs-list .position-list-item"));

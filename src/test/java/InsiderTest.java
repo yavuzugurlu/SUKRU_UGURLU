@@ -22,7 +22,7 @@ public class InsiderTest {
     }
 
     @Test
-    public void testCareerPageAndJobApplication() {
+    public void testApplication() {
         // Case-1:
         System.out.println("Case-1: ");
         homePage.visitHomePage();
