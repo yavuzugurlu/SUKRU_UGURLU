@@ -32,6 +32,16 @@ public class JobApplyPage {
             } else {
                 System.out.println("İş ilanına yönlendirilemedi!");
             }
+            try {
+                // Butonun üzerine tıklamadan önce görünür olduğundan emin olalım
+                WebElement applyButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a.postings-btn.template-btn-submit.shamrock")));
+
+                // Butona tıklama işlemi
+                applyButton.click();
+                System.out.println("Apply for this job butonuna tıklandı!");
+            } catch (Exception e) {
+                System.out.println("Butona tıklanırken bir hata oluştu: " + e.getMessage());
+            }
         } catch (Exception e) {
             System.err.println("Hata oluştu: " + e.getMessage());
             e.printStackTrace();  // Hata detaylarını ekrana yazdır
